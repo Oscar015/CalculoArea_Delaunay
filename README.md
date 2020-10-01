@@ -1,2 +1,0 @@
-# CalculoArea_Delaunay
- 

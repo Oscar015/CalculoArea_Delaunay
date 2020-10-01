@@ -10,7 +10,7 @@ from Delaunay import Delaunay
 
 
 
-puntos = np.asarray([(1,1.9),(3.6,1),(7,3), (4,4.5), (3,5),(1,4),(-1,3)])
+puntos = np.asarray([(1,1.9),(3.6,1),(6.5,3), (4,5), (3,5),(1,4),(-1,3)])
 if(utils.isConvex(puntos)):
     td = Delaunay(radius=utils.radiusFrame(puntos))
     for punto in puntos:

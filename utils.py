@@ -46,7 +46,29 @@ def perpendicular(p,q):
         # En array:
         return np.array([1/m,1]),np.array([PM[0]/m+PM[1]])
     
-    
+
+
+def ScatterPoints(points,**kwargs):
+    """
+    Dada una lista de puntos representa el grafico de dispersion
+
+    Parameters
+    ----------
+    points : array (n,2)
+        lista de puntos en R^2
+    **kwargs : TYPE
+        Argumentos de la clase Line2D
+
+
+    """
+    x = []
+    y = []
+    for i in range(len(points)):
+        x.append(points[i][0])
+        y.append(points[i][1])
+    plt.plot(x,y, 'o', **kwargs)    
+
+
 def PlotDT(coords, triangulos, circulos=[],radius=99999):
     """
     Dibuja la triangulación de Delaunay
@@ -62,11 +84,7 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
     """
     fig, ax = plt.subplots(dpi=300)
     #Dibujamos los puntos
-    x,y =[],[]
-    for punto in coords:
-        x.append(punto[0])
-        y.append(punto[1])
-    plt.plot(x,y,'bo')
+    ScatterPoints(coords, c='b')
     
      #Dibujamos los triangulos
     for tri in triangulos:
@@ -106,7 +124,7 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
 
     plt.axis([-1, radius+1, -1, radius+1])
     plt.axis('equal')
-    #plt.axis('off')
+    plt.axis('off')
     plt.show()
 
 

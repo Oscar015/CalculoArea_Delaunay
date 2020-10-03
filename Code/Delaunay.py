@@ -68,6 +68,7 @@ class Delaunay:
 
 
     def AddPoint(self, p):
+        
         p = np.asarray(p)
         idx = len(self.coords)
         self.coords.append(p)

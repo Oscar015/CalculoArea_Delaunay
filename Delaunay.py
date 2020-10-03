@@ -39,20 +39,6 @@ class Delaunay:
             
             
     def circuncentro(self, tri):
-        pts = np.asarray([self.coords[v] for v in tri])
-        pts2 = np.dot(pts, pts.T)
-        A = np.bmat([[2 * pts2, [[1],
-                                 [1],
-                                 [1]]],
-                      [[[1, 1, 1, 0]]]])
-
-        b = np.hstack((np.sum(pts * pts, axis=1), [1]))
-        x = np.linalg.solve(A, b)
-        bary_coords = x[:-1]
-        center = np.dot(bary_coords, pts)
-
-        radius = np.linalg.norm(pts[0] - center) # euclidean distance
-        return (center, radius)
         """
         Cálculo del circuncentro de un triangulo
 
@@ -66,8 +52,9 @@ class Delaunay:
         M = np.array([r[0],s[0]])
         N = np.array([r[1],s[1]])
         #resolvemos el sistema y obtenemos el punto de corte, el circuncentro
-        centro = np.linalg.solve(M,N)
+        centro = np.linalg.solve(M,N).reshape(2,)
         radio = np.linalg.norm(A - centro) #Calculamos la distancia euclidea
+
         return (centro, radio)
     
     def inCircle(self, tri, p):

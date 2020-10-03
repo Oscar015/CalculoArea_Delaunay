@@ -9,7 +9,6 @@ import utils
 from Delaunay import Delaunay
 
 
-
 #puntos = np.asarray([(1,1.9),(3.6,1),(6.5,3), (4,5), (3,5),(1,4),(-1,3)])
 
 puntos = np.asarray([(1,-6), (2.2,-6), (4.5,-3), (5,-1.1), (4.8,1), (3.4,4),\
@@ -38,3 +37,5 @@ if(utils.isConvex(puntos)):
 else:
     print("Esta distribución de puntos no corresponde a un poligono convexo.\n \
           No es posible calcular el area del poligono.")
+
+

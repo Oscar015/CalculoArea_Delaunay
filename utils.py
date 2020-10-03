@@ -9,14 +9,6 @@ Created on Sat Sep 26 12:03:13 2020
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-def Center(puntos):
-    x = y = 0
-    for i in range(len(puntos)):
-        x += puntos[i][0]
-        y += puntos[i][1]
-    return np.array([x/len(puntos),y/len(puntos)])
-
 def perpendicular(p,q):
     """
     A partir de 2 puntos p,q calculamos el punto medio y 
@@ -74,7 +66,7 @@ def ScatterPoints(points,**kwargs):
     for i in range(len(points)):
         x.append(points[i][0])
         y.append(points[i][1])
-    plt.plot(x,y, 'o', **kwargs)
+    plt.plot(x,y, 'o', **kwargs)    
 
 
 def PlotDT(coords, triangulos, circulos=[],radius=99999):
@@ -125,6 +117,7 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
                  x2, y2, color2,\
                  x3, y3, color3)
     
+    #dibujamos los lados del poligono:
     #Dibujamos los circulos
     for circulo in circulos:
         ax.add_artist(plt.Circle(circulo[0],circulo[1],color="green",fill=False))

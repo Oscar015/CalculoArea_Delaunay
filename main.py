@@ -33,7 +33,7 @@ for triangulo in triangulos:
     
     area += utils.areaTriangulo(A,B,C)
 if(utils.isConvex(puntos)):  
-    print("El area el poligono es",round(area,16))
+    print("El area el poligono es",round(area,3))
     
 else:
     print("Esta distribución de puntos no corresponde a un poligono convexo.\n \

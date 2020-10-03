@@ -66,15 +66,9 @@ def ScatterPoints(points,**kwargs):
         lista de puntos en R^2
     **kwargs : TYPE
         Argumentos de la clase Line2D
-
-
     """
-    x = []
-    y = []
-    for i in range(len(points)):
-        x.append(points[i][0])
-        y.append(points[i][1])
-    plt.plot(x,y, 'o', **kwargs)
+    
+    plt.plot(points[:,0],points[:,1], 'o', **kwargs)
 
 
 def PlotDT(coords, triangulos, circulos=[],radius=99999):
@@ -91,8 +85,6 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
 
     """
     fig, ax = plt.subplots(dpi=300)
-    #Dibujamos los puntos
-    ScatterPoints(coords, c='b')
     
      #Dibujamos los triangulos
     for tri in triangulos:
@@ -129,11 +121,13 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
     for circulo in circulos:
         ax.add_artist(plt.Circle(circulo[0],circulo[1],color="green",fill=False))
 
+    #Por último dibujamos los puntos
+    ScatterPoints(coords, c='b')
+    
     plt.axis([-1, radius+1, -1, radius+1])
     plt.axis('equal')
     plt.axis('off')
     plt.show()
-
 
 
 

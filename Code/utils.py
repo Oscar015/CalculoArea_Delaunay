@@ -131,7 +131,7 @@ def PlotDT(coords, triangulos, circulos=[],radius=99999):
 
 
 
-def areaTriangulo(A,B,C):
+def areaTrianguloHeron(A,B,C):
     #Calculamos la longitud de los lados del triangulo
     AB = np.linalg.norm(B-A)
     AC = np.linalg.norm(C-A)
@@ -143,7 +143,17 @@ def areaTriangulo(A,B,C):
     #Ahora usando la formula de Herón calculamos el área:
     return (s*(s-AB)*(s-AC)*(s-BC))**0.5
     
-    
+
+
+def areaTrianguloDeterminante(A,B,C):
+    #Calculamos los vectores de dos de los lados
+    AB = B-A
+    AC = C-A
+    #Realizamos el deterinante para allar el area del paralelogramo comprendido
+    #entre los dos vectores y dividimos por la mitad
+    return 0.5*(AB[0]*AC[1]-AB[1]*AC[0])
+
+
 
 def isConvex(puntos):
     puntos = np.asarray(puntos)

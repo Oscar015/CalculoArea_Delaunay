@@ -30,7 +30,7 @@ for triangulo in triangulos:
     B = puntos[triangulo[1]]
     C = puntos[triangulo[2]]
     
-    area += utils.areaTriangulo(A,B,C)
+    area += utils.areaTrianguloDeterminante(A,B,C)
 if(utils.isConvex(puntos)):  
     print("El area el poligono es",round(area,3))
     

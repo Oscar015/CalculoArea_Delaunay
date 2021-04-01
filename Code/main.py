@@ -37,5 +37,3 @@ if(utils.isConvex(puntos)):
 else:
     print("Esta distribución de puntos no corresponde a un poligono convexo.\n \
           No es posible calcular el area del poligono.")
-
-

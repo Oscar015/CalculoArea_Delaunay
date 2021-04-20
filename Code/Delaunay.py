@@ -32,18 +32,18 @@ class Delaunay:
         T2 = (2, 3, 1)
         self.triangulos[T1] = [T2, None, None]
         self.triangulos[T2] = [T1, None, None]
-        
+
         #Calculamos el centro y el radio del circulo para cada triangulo
         for t in self.triangulos:
             self.circulos[t] = self.circuncentro(t)
-            
-            
+
+
     def circuncentro(self, tri):
         """
         Cálculo del circuncentro de un triangulo
 
         """
-        
+
         A,B,C = np.asarray([self.coords[v] for v in tri])
         #Calculamos las rectas perpendiculares de dos lados del triangulo
         #y las organizamos en matriz de coeficientes y matriz de resultados
@@ -56,29 +56,30 @@ class Delaunay:
         radio = np.linalg.norm(A - centro) #Calculamos la distancia euclidea
 
         return (centro, radio)
-    
+
     def inCircle(self, tri, p):
         """
         Comporbamos si el punto está en el circuncirculo del triangulo.
 
         """
-        
+
         centro, radio = self.circulos[tri]
-        return np.linalg.norm(centro-p)<=radio
+        return np.linalg.norm(centro-p)<radio
+        # return np.linalg.norm(centro-p)<=radio
 
 
     def AddPoint(self, p):
-        
+
         p = np.asarray(p)
         idx = len(self.coords)
         self.coords.append(p)
-        
+
         #Buscamos los triangulos cuyo circuncirculo contenga a p
         bad_triangles = []
         for T in self.triangulos:
             if self.inCircle(T, p):
                 bad_triangles.append(T)
-                
+
         # Encontramos el perimetro CCW (poligono estrellado) del triangulo
         # expresado como una lista de pares de puntos y el triangulo opuesto a
         #cada lado
@@ -87,7 +88,7 @@ class Delaunay:
         T = bad_triangles[0]
         lado = 0
         #Encontramos el triangulo opuesto a este lado:
-        
+
         while True:
             # Comprobamos si el lado del triangulo T esta en el perimetro
             # si el triangulo opuesto al lado está fuera de la lista
@@ -95,10 +96,10 @@ class Delaunay:
             if tri_op not in bad_triangles:
                 # Añadimos el lado y el triangulo externo a la lista del perimetro
                 perimetro.append((T[(lado+1) % 3], T[(lado-1) % 3], tri_op))
-    
+
                 # Nos movemos al siguiente lado del triangulo
                 lado = (lado + 1) % 3
-    
+
                 # Comporbamos si el perimetro es un bucle cerrado
                 if perimetro[0][0] == perimetro[-1][1]:
                     break
@@ -106,15 +107,15 @@ class Delaunay:
                 # Nos movemos al siguiente lado del triangulo opuesto
                 lado = (self.triangulos[tri_op].index(T) + 1) % 3
                 T = tri_op
-                
-        
-        
+
+
+
         # Quitamos los triangulos muy cerca del punto p de nuestra solución
         for T in bad_triangles:
             del self.triangulos[T]
             del self.circulos[T]
-            
-        
+
+
         # retriangulamos el hueco deado por bad_triangles
         new_triangles = []
         for (e0, e1, tri_op) in perimetro:
@@ -149,7 +150,7 @@ class Delaunay:
         # Filtramos los triángulos con cualquier vértice en el cuadrado inicial
         return [(a-4, b-4, c-4)
                 for (a, b, c) in self.triangulos if a > 3 and b > 3 and c > 3]
-    
+
     def exportarCirculos(self):
         """Exportamos las circunferencias como una lista de (centro, radio)
         """
